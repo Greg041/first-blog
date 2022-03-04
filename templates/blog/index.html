@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% for current_post in posts %}
+<article>
+    <header>
+        <h2>{{ current_post.title }}</h2>
+        <div class="meta">
+            Publicado en {{ current_post.date|date:"d M" }} por <strong>{{ current_post.author.name }}</strong> <span>(2 comentarios)</span>
+        </div>
+    </header>
+    <img src={{ current_post.image.url }} alt="">
+    <p>
+        {{ current_post.excerpt|linebreaks }}
+    </p>
+    <footer >
+        <a class="readmore" href="single-current_post">Leer más...</a>
+    </footer>
+</article>
+{% endfor %}
+<div class="clearfix"></div>
+{% endblock content %}

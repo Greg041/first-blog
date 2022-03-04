@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h2>Añadir post</h2>
+<form id="add_post_form">
+    <p>
+        <label>Título del post: </label>
+        <input type="text" class="add_post_options">
+    </p>
+    <p>
+        <label>Categoría: </label>
+        <select class="add_post_options">
+            <option value="">Animé</option>
+            <option>Videojuegos</option>
+            <option>Tecnología</option>
+            <option>Marketing</option>
+            <option>Gadgets</option>
+            <option>Diseño</option>
+        </select>
+    </p>
+    <p>
+        <label>Contenido: </label>
+        <textarea class="add_post_options" id="textarea"></textarea>
+    </p>
+    <p>
+        <label>Seleccionar imagen: </label>
+        <input type="file" >
+    </p>
+    <p>
+        <button id="add_post_button">Añadir post</button>
+    </p>
+</form>
+<div class="clearfix"></div>
+{% endblock content %}
+
