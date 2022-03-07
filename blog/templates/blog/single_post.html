@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<article>
+    <header>
+        <h2>{{ post.title }}</h2>
+        <div class="meta">
+            Publicado en {{ post.date|date:"d M" }} por <strong>{{ post.author }}</strong> <span>(2 comentarios)</span>
+        </div>
+    </header>
+    <img src="{{ post.image.url }}" alt="post-image">
+    <p>
+        {{ post.content|linebreaksbr }}
+    </p>
+</article>
+<div class="clearfix"></div>
+<h3>Comentarios Recientes</h3>
+<div class="comments">
+    {% for comment in comments %}
+    <div class="comment_block">
+        <div class="avatar">
+            <img src="{% static "images/user-default.png" %}" alt="foto_usuario">
+        </div>
+        <div class="individual_comment">
+            <p><strong>{{ comment.username }}</strong> escribió:</p>
+            <p>{{ comment.comment|linebreaks }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <div id="leave_comment">
+        <h3>Deja tu comentario</h3>
+        <form action="{% url "single_post_view" post.slug %}" method="POST">
+            {% csrf_token %}
+            {% for field in comment_form %}
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+            {% endfor %}
+            <button>Añadir comentario</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
