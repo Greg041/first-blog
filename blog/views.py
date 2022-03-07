@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 from django.views.generic.list import ListView
+from django.views.generic.edit import FormView
 from django.shortcuts import get_object_or_404
-from .models import Post, Comment
-from .form import CommentForm
+from datetime import date
+from .models import Post, Comment, Author
+from .form import CommentForm, AddPostForm
 
 
 # Create your views here.
@@ -15,9 +17,18 @@ class IndexView(ListView):
     paginate_by = 2
     
 
-class AddPostView(View):
-    def get(self, request):
-        return render(request, "blog/add_post.html")
+class AddPostView(FormView):
+    template_name = "blog/add_post.html"
+    form_class = AddPostForm
+    success_url = "/success/"
+
+    def form_valid(self, form):
+        post_object = form.save(commit=False)
+        author = Author.objects.get_or_create(name=form.cleaned_data["author"])
+        print(author)
+        post_object.date = date.today()
+        print(post_object.date)
+
 
 
 class SinglePostView(View):
@@ -34,7 +45,9 @@ class SinglePostView(View):
     def post(self, request, slug):
         form = CommentForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_commentary = form.save(commit=False)
+            new_commentary.post = Post.objects.get(slug=slug)
+            new_commentary.save()
             return redirect("single_post_view", slug)
         current_post = get_object_or_404(Post, slug=slug)
         context = {
@@ -43,3 +56,8 @@ class SinglePostView(View):
             "comments": current_post.comment_set.all()
         }
         return render(request, "blog/single_post.html", context)
+
+
+class SuccessView(TemplateView):
+    template_name = "success.html"
+

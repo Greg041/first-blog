@@ -41,9 +41,8 @@ class Post(models.Model):
         return reverse("single_post_view", kwargs={"slug": self.slug})
     
 
-
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=False)
     username = models.CharField(max_length=50)
     email = models.EmailField()
     comment = models.TextField(max_length=1000)

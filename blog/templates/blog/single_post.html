@@ -1,6 +1,10 @@
 {% extends "main.html" %}
 {% load static %}
 
+{% block page_title %}
+<title>Geek blog | {{ post.title }}</title>
+{% endblock page_title %}
+
 {% block content %}
 <article>
     <header>
