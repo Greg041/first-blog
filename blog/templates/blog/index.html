@@ -2,41 +2,8 @@
 
 {% block content %}
 {% for current_post in posts %}
-<article>
-    <header>
-        <h2>{{ current_post.title }}</h2>
-        <div class="meta">
-            Publicado en {{ current_post.date|date:"d M" }} por <strong>{{ current_post.author.name }}</strong> <span>(2 comentarios)</span>
-        </div>
-    </header>
-    <img src={{ current_post.image.url }} alt="">
-    <p>
-        {{ current_post.excerpt|linebreaks }}
-    </p>
-    <footer >
-        <a class="readmore" href="{% url "single_post_view" current_post.slug %}">Leer más...</a>
-    </footer>
-</article>
+    {% include "blog/includes/posts-list.html" with post=current_post %}
 {% endfor %}
-<nav aria-label="Page navigation" id="pagination-nav">
-    <ul class="pagination" id="navigation-ul">
-        {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-        {% else %}
-        <li class="page-item disabled"><a class="page-link">Previous</a></li>    
-        <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>   
-        {% endif %}
-        {% if page_obj.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>    
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>   
-        {% elif page_obj.has_next and pagination.num_pages > 1 %}
-        <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
-        <li class="page-item disabled"><a class="page-link">Next</a></li>
-        {% else %}
-        <li class="page-item disabled"><a class="page-link">Next</a></li>
-        {% endif %}
-    </ul>
-</nav>
+    {% include "blog/includes/page-navigation.html" %}
 <div class="clearfix"></div>
 {% endblock content %}

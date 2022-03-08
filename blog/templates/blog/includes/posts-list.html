@@ -1,0 +1,17 @@
+<article>
+    <header>
+        <h2>{{ post.title }}</h2>
+        <div class="meta">
+            Publicado el {{ post.date|date:"d M" }} por <strong style="font-weight:bold">{{ post.author.name }}</strong> 
+            <span>({{ post.comment_set.all|length }} {% if post.comment_set.all|length == 1 %}
+                comentario{% else %}comentarios{% endif%})</span>
+        </div>
+    </header>
+    <img src={{ post.image.url }} alt="">
+    <p>
+        {{ post.excerpt|linebreaks }}
+    </p>
+    <footer >
+        <a class="readmore" href="{% url "single_post_view" post.slug %}">Leer más...</a>
+    </footer>
+</article>

@@ -31,7 +31,7 @@
         <main class="container">
             <aside id="sidebar">
                 <div class="search">
-                    <form>
+                    <form method="POST" action>
                         <input type="search" placeholder="Busca un artículo...">
                         <input type="image" src="{% static "images/search.png" %}">
                     </form>
@@ -39,12 +39,12 @@
                 <div class="clearfix"></div>
                 <nav id="sidebar_nav">
                     <ul>
-                        <li><a href="#">Animé</a></li>
-                        <li><a href="#">Videojuegos</a></li>
-                        <li><a href="#">Tecnología</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        <li><a href="#">Gadgets</a></li>
-                        <li><a href="#">Diseño</a></li>
+                        <li><a href="{% url "category_posts" "Animé" %}">Animé</a></li>
+                        <li><a href="{% url "category_posts" "Videojuegos" %}">Videojuegos</a></li>
+                        <li><a href="{% url "category_posts" "Tecnología" %}">Tecnología</a></li>
+                        <li><a href="{% url "category_posts" "Marketing" %}">Marketing</a></li>
+                        <li><a href="{% url "category_posts" "Gadgets" %}">Gadgets</a></li>
+                        <li><a href="{% url "category_posts" "Diseño" %}">Diseño</a></li>
                     </ul>
                 </nav>
                 <div class="publi">
@@ -61,7 +61,7 @@
                 <div class="footer_right">
                     <nav class="footer_nav">
                         <ul>
-                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url "index_view" %}">Home</a></li>
                             <li><a href="#">Sobre nosotros</a></li>
                             <li><a href="#">Contacto</a></li>
                             <li><a href="#">Recursos</a></li>
@@ -71,12 +71,12 @@
                     </nav>
                     <nav class="footer_nav">
                         <ul>
-                            <li><a href="#">Animé</a></li>
-                            <li><a href="#">Videojuegos</a></li>
-                            <li><a href="#">Tecnología</a></li>
-                            <li><a href="#">Marketing</a></li>
-                            <li><a href="#">Gadgets</a></li>
-                            <li><a href="#">Diseño</a></li>
+                            <li><a href="{% url "category_posts" "Animé" %}">Animé</a></li>
+                            <li><a href="{% url "category_posts" "Videojuegos" %}">Videojuegos</a></li>
+                            <li><a href="{% url "category_posts" "Tecnología" %}">Tecnología</a></li>
+                            <li><a href="{% url "category_posts" "Marketing" %}">Marketing</a></li>
+                            <li><a href="{% url "category_posts" "Gadgets" %}">Gadgets</a></li>
+                            <li><a href="{% url "category_posts" "Diseño" %}">Diseño</a></li>
                         </ul>
                     </nav>
                 </div>
