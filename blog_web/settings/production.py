@@ -1,15 +1,12 @@
-import base
-from os import getenv
+from .base import *
 import django_heroku
 
-base.SECRET_KEY = getenv('SECRET_KEY')
+DEBUG = False
 
-base.DEBUG = False
+MEDIA_ROOT = BASE_DIR / 'uploads'
 
-base.MEDIA_ROOT = base.BASE_DIR / 'uploads'
+MEDIA_URL = '/uploaded-images/'
 
-base.MEDIA_URL = '/uploaded-images/'
-
-STATIC_ROOT = base.BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 django_heroku.settings(locals())
