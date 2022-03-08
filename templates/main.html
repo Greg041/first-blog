@@ -31,8 +31,9 @@
         <main class="container">
             <aside id="sidebar">
                 <div class="search">
-                    <form method="POST" action>
-                        <input type="search" placeholder="Busca un artículo...">
+                    <form method="POST" action="{% url "search_view" %}">
+                        {% csrf_token %}
+                        <input type="search" placeholder="Busca un artículo..." name="search_terms">
                         <input type="image" src="{% static "images/search.png" %}">
                     </form>
                 </div>

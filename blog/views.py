@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.utils.translation import gettext as _
 from datetime import date
-from .models import Post, Comment, Author
+from .models import Post, Author
 from .form import CommentForm, AddPostForm
 
 
@@ -95,3 +95,15 @@ class CategoryPostsView(ListView):
 
         context = self.get_context_data()
         return self.render_to_response(context)
+
+
+class SearchView(ListView):
+    template_name = "blog/category-posts.html"
+    paginate_by = 2
+    context_object_name = "posts"
+
+    def post(self, request, **kwargs):
+        search_terms = request.POST["search_terms"]
+        self.object_list = Post.objects.filter(title__icontains=search_terms).order_by("-date")
+        context = super().get_context_data(**kwargs)
+        return render(request, "blog/search-page.html", context)
