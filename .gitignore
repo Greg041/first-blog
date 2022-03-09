@@ -2,3 +2,4 @@ venv/
 secret_key.txt
 blog_web/settings/development.py
 blog_web/settings/.env
+uploads/
