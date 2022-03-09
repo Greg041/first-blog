@@ -2,7 +2,7 @@ from unicodedata import category
 from xml.dom.minidom import Attr
 from django import forms
 from django.forms import ModelForm
-from .models import Comment, Post
+from .models import Comment, Post, Category
 
 class CommentForm(ModelForm):
     class Meta:
@@ -13,8 +13,13 @@ class CommentForm(ModelForm):
 
 class AddPostForm(ModelForm):
     author = forms.CharField(max_length=50, 
-                            widget=forms.TextInput(attrs= {'class': 'add_post_options'}), required=True,
-                            label="Autor (tu nombre):")
+                            widget=forms.TextInput(attrs={'class': 'add_post_options'}), required=True,
+                            label="Autor (tu nombre):")                       
+    category = forms.ModelMultipleChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
+        label="Escoje la(s) categoría(s) a la(s) que pertenezca tu post:"
+    )
 
     class Meta:
         model = Post

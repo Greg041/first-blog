@@ -336,6 +336,10 @@ ul {
     transform: scale(1.1);
 }
 
+#id_category {
+    width: 100;
+    background-color: red;
+}
 
 /*---------- media query -----------*/
 

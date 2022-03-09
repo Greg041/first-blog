@@ -36,14 +36,14 @@
     {% endfor %}
     <div id="leave_comment">
         <h3>Deja tu comentario</h3>
-        <form action="{% url "single_post_view" post.slug %}" method="POST">
+        <form action="{% url "single_post_view" post.slug post.id %}" method="POST" onsubmit="myButton.disabled = true; return true;">
             {% csrf_token %}
             {% for field in comment_form %}
             {{ field.label_tag }}
             {{ field }}
             {{ field.errors }}
             {% endfor %}
-            <button>Añadir comentario</button>
+            <input type="submit" name="myButton" value="Añadir comentario">
         </form>
     </div>
 </div>

@@ -6,14 +6,10 @@
 
 {% block content %}
 <h2>Añadir post</h2>
-<form id="add_post_form" method="POST" enctype="multipart/form-data">
-    {% for field in form %}
-        {% csrf_token %}
-        {{ field.label_tag }}
-        {{ field.errors }}
-        {{ field }}
-    {% endfor %}
-    <button id="add_post_button">Añadir post</button>
+<form id="add_post_form" method="POST" enctype="multipart/form-data" onsubmit="myButton.disabled = true; return true;">
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" name="myButton" value="Añadir post" id="add_post_button">
 </form>
 <div class="clearfix"></div>
 {% endblock content %}

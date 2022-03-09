@@ -12,6 +12,6 @@
         {{ post.excerpt|linebreaks }}
     </p>
     <footer >
-        <a class="readmore" href="{% url "single_post_view" post.slug %}">Leer más...</a>
+        <a class="readmore" href="{% url "single_post_view" post.slug post.id %}">Leer más...</a>
     </footer>
 </article>

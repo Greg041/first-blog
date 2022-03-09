@@ -336,6 +336,11 @@ ul {
     transform: scale(1.1);
 }
 
+#id_category {
+    width: 100;
+    margin-bottom: 1rem;
+}
+
 
 /*---------- media query -----------*/
 

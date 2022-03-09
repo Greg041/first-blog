@@ -10,6 +10,7 @@ from .models import Post, Author
 from .form import CommentForm, AddPostForm
 
 
+
 # Create your views here.
 class IndexView(ListView):
     model = Post
@@ -26,18 +27,23 @@ class AddPostView(FormView):
 
     def form_valid(self, form):
         post_object = form.save(commit=False)
-        author = Author(name=form.cleaned_data["author"])
-        author.save()
+        post_choosed_categories = form.cleaned_data["category"]
+        if Author.objects.filter(name=form.cleaned_data["author"]):
+            author = Author.objects.get(name=form.cleaned_data["author"])
+        else:
+            author = Author(name=form.cleaned_data["author"])
+            author.save()
         post_object.author = author
         post_object.date = date.today()
         post_object.save()
+        post_object.category.add(*post_choosed_categories)
         return super().form_valid(form)
         
 
 
 class SinglePostView(View):
-    def get(self, request, slug):
-        current_post = get_object_or_404(Post, slug=slug)
+    def get(self, request, slug, pk):
+        current_post = get_object_or_404(Post, id=pk)
         form = CommentForm()
         context = {
             "post": current_post,
@@ -46,14 +52,14 @@ class SinglePostView(View):
         }
         return render(request, "blog/single_post.html", context)
 
-    def post(self, request, slug):
+    def post(self, request, slug, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
             new_commentary = form.save(commit=False)
-            new_commentary.post = Post.objects.get(slug=slug)
+            new_commentary.post = Post.objects.get(id=pk)
             new_commentary.save()
-            return redirect("single_post_view", slug)
-        current_post = get_object_or_404(Post, slug=slug)
+            return redirect("single_post_view", slug, pk)
+        current_post = get_object_or_404(Post, id=pk)
         context = {
             "post": current_post,
             "comment_form": form,
