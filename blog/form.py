@@ -26,8 +26,8 @@ class AddPostForm(ModelForm):
         fields = ("title", "excerpt", "image", "content", "category")
         widgets = {
             'title': forms.TextInput(attrs= {'class': 'add_post_options'}),
-            'excerpt': forms.Textarea(attrs= {'class': 'add_post_options', 'rows': 10, 'min-height': 10}),
-            'content': forms.Textarea(attrs= {'class': 'add_post_options', 'rows': 20, 'min-height': 20}),
+            'excerpt': forms.Textarea(attrs= {'class': 'add_post_options', 'rows': 10, 'style': 'resize:none;'}),
+            'content': forms.Textarea(attrs= {'class': 'add_post_options', 'rows': 20, 'style': 'resize:none;'}),
             "category": forms.SelectMultiple(attrs= {'class': 'add_post_options'})
             }
         labels = {"title": "Título del post:", "excerpt": "Premisa:", "content": "Contenido", 
