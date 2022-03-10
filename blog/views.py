@@ -5,7 +5,7 @@ from django.views.generic.edit import FormView
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.utils.translation import gettext as _
-from datetime import date
+from datetime import datetime
 from .models import Post, Author
 from .form import CommentForm, AddPostForm
 
@@ -34,8 +34,8 @@ class AddPostView(FormView):
             author = Author(name=form.cleaned_data["author"])
             author.save()
         post_object.author = author
-        post_object.date = date.today()
-        post_object.save()
+        post_object.date = datetime.today()
+        post_object.save() 
         post_object.category.add(*post_choosed_categories)
         return super().form_valid(form)
         

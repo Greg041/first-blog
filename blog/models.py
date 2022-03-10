@@ -23,7 +23,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    date = models.DateField()
+    date = models.DateTimeField()
     excerpt = models.TextField(max_length=500)
     content = models.TextField()
     image = models.ImageField(upload_to="images")
