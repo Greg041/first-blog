@@ -30,7 +30,7 @@ class AddPostView(FormView):
         author, created = Author.objects.get_or_create(name=form.cleaned_data["author"])
         post_object.author = author
         post_object.date = datetime.now()
-        post_object.save() 
+        post_object.save()
         post_object.category.add(*form.cleaned_data["category"])
         return super().form_valid(form)
         
