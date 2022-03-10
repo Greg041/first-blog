@@ -27,16 +27,11 @@ class AddPostView(FormView):
 
     def form_valid(self, form):
         post_object = form.save(commit=False)
-        post_choosed_categories = form.cleaned_data["category"]
-        if Author.objects.filter(name=form.cleaned_data["author"]):
-            author = Author.objects.get(name=form.cleaned_data["author"])
-        else:
-            author = Author(name=form.cleaned_data["author"])
-            author.save()
+        author, created = Author.objects.get_or_create(name=form.cleaned_data["author"])
         post_object.author = author
-        post_object.date = datetime.today()
+        post_object.date = datetime.now()
         post_object.save() 
-        post_object.category.add(*post_choosed_categories)
+        post_object.category.add(*form.cleaned_data["category"])
         return super().form_valid(form)
         
 
