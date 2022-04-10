@@ -15,16 +15,27 @@
         <link rel="stylesheet" href={% static "main.css" %}>
     </head>
     <body>
-        <header id="main-header">
-            <div id="branding">
-                <img src="{% static "images/geek.jpg" %}" alt="La zona del Geek">
-                <a href="{% url "index_view" %}"><h1>La zona del Geek</h1></a>
-            </div>
-            <nav id="header-nav">
-                <ul>
-                    <li><a href="{% url "index_view" %}">Home</a></li>
-                    <li><a href="{% url "add_post_view" %}">Añadir post</a></li>
-                </ul>
+        <header>
+            <nav class="navbar navbar-expand-md py-0 navbar-dark" id="main-header">
+                <div id="column-1" class="h-100">
+                    <img src="{% static "images/geek.jpg" %}" alt="La zona del Geek" id="header-logo" class="h-100">
+                    <a href="{% url "index_view" %}" class="text-white"><h1>La zona del Geek</h1></a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon" style="color: white;">
+                    </span>
+                </button>
+                <div id="column-2">
+                    <div class="collapse navbar-collapse my-3" id="collapsibleNavbar">
+                        <ul class="navbar-nav ms-4">
+                            <li class="nav-item">
+                                <a href="{% url "index_view" %}" class="nav-link h3 text-white">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url "add_post_view" %}" class="nav-link h3 text-white">Añadir post</a></li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </header>
         <div class="clearfix"></div>
