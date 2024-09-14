@@ -1,0 +1,42 @@
+{% extends "common/main.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "authors/css/author-account.css" %}">
+{% endblock css_files %}
+
+{% block content_div_classes %}
+class="d-flex flex-column my-5"
+{% endblock content_div_classes %}
+
+{% block content %}
+<div class="d-md-flex justify-content-between">
+    {% include "authors/snippets/author_profile_picture.html" %}
+    <form 
+    id="modifyAuthoForm" 
+    class="col-12 col-md-9 py-5 px-5 bg-white-geek rounded-3" 
+    hx-post="{% url "authors:profile" %}"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    hx-target="#alertContainer"
+    hx-swap="innerHTML scroll:bottom"
+    >
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">
+                    {{ field.label }}
+                    {% if field.field.required %}
+                    <span style="color: red;">*</span>
+                    {% endif %}
+                </label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        {% include "common/snippets/submit_form_button.html" with text_content='Guardar cambios' %}           
+    </form>
+</div>
+{% endblock content %}
+
+{% block javascript_files %}
+<script type="module" src="{% static "authors/js/author-account.js" %}"></script>
+{% endblock javascript_files %}

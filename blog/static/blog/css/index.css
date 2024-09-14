@@ -1,0 +1,184 @@
+#contenido {
+    margin-top: 2.5%;
+    border: solid 1px #f3f2f2;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #f3f2f2;
+}
+
+#contenido article{
+    padding: 20px 0px 40px 0px;
+    border-bottom: dotted rgb(158, 158, 158) 1px;
+}
+
+#contenido article:last-of-type{
+    border-bottom: None
+}
+
+#contenido article img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+#contenido article h2{
+    padding: 10px 0 10px 0;
+}
+
+#contenido .meta {
+    background-color: #1DB7DD;
+    color: white;
+    padding: 8px 8px 8px 10px;
+    font-weight: 50;
+}
+
+#contenido .meta span{
+    float: right;
+}
+
+.readmore {
+    text-align: center;
+    border: solid 1px #e0e0e0;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 10px 0;
+    display: block;
+    background-color: #e0e0e0;
+    color: black;
+}
+
+.readmore:hover {
+    background-color: #c5c5c5;
+}
+
+#pagination-nav {
+    width: 100%;
+}
+
+#navigation-ul {
+    margin-left: 35%;
+}
+
+#sidebar {
+    margin-top: 2.5%;
+    padding: 0 10px 40px 10px;
+    background-color: #f3f2f2;
+    border: solid 1px;
+    border-radius: 10px;
+    height: 100%;
+}
+
+#sidebar .search{
+    float: right;
+}
+
+#sidebar .search input[type="search"]{
+    float: left;
+    width: 88%;
+    padding: 4px 0 4px 4px;
+    border: solid 1px #d4d4d4;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+#sidebar .search input[type="image"]{
+    float: right;
+    width: 10%;
+    height: auto;
+    margin-top: 40px;
+}
+
+#sidebar_nav{
+    float: right;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#sidebar_nav ul{
+    float: left;
+    padding: 40px 0 0 0;
+    width: 100%;
+}
+
+#sidebar_nav li{
+    padding: 7px 0;
+    border-bottom: dotted 1px black;
+    border-width: 100%;
+}
+
+#sidebar_nav a{
+    color: black;
+    font-weight: bold;
+}
+
+#sidebar_nav a:hover{
+    color: #1DB7DD;
+}
+
+.publi img{
+    width: 100%;
+}
+
+/*---------- media query -----------*/
+
+/* Media animation preferences for navbar menu delay */
+@media (prefers-reduced-motion: reduce) {
+    .collapsing {
+        transition-property: height, visibility;
+        transition-duration: .5s;
+    }
+}
+
+@media only screen and (max-width: 901px){
+
+    #contenido .meta{
+        font-size: 12px;
+    }
+
+}
+
+@media only screen and (max-width: 764px){
+    
+    .container #sidebar{
+        float: none;
+        padding-top: 0;
+        width: 95%;
+        margin-top: 4%;
+    }
+
+    .container #contenido{
+        width: 93%;
+    }
+
+    #navigation-ul {
+        margin-left: 30%;
+    }
+}
+
+@media only screen and (max-width: 570px){
+
+    #navigation-ul {
+        margin-left: 30%;
+    }
+}
+
+
+@media only screen and (max-width: 400px){
+ 
+    #contenido .meta{
+        font-size: 9px;
+    }
+
+    .container #sidebar{
+        width: 89%;
+    }
+
+    .container #contenido{
+        width: 85%;
+    }
+
+    #navigation-ul {
+        margin-left: 25%;
+    }
+}

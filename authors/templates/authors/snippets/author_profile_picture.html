@@ -1,0 +1,37 @@
+{% load static cloudinary %}
+
+<div id="authorProfilePictureContainer" class="profile-image-container col-12 col-md-2 mb-5 position-relative h-100">
+    {% if author.picture %}
+    <img 
+    id="authorProfileImage"
+    src="{{ author.picture.url }}"
+    alt="profile image" 
+    class="img-fluid rounded"
+    >
+    {% else %}
+    <img 
+    id="authorProfileImage"
+    src="{% static "common/img/no-user-image.png" %}"
+    alt="profile image" 
+    class="img-fluid rounded"
+    >
+    {% endif %}
+    
+    <div class="overlay rounded d-flex position-absolute w-100 top-0 start-0 w-100 h-100 justify-content-center align-items-center">
+        <button id="uploadPictureBtn" class="btn btn-light">Sube una imagen</button>
+        <input 
+        id="uploadPictureInput" 
+        class="d-none" 
+        type="file" 
+        accept=".jpg, .jpeg, .png" 
+        name="picture" 
+        hx-post="{% url "authors:update-profile-picture" %}"
+        hx-target="#authorProfilePictureContainer"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-encoding="multipart/form-data"
+        hx-swap="outerHTML"
+        hx-disabled-elt="this"
+        hx-preserve="#uploadPictureInput"
+        >
+    </div>
+</div>

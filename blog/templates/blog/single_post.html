@@ -1,12 +1,20 @@
-{% extends "main.html" %}
+{% extends "common/main.html" %}
 {% load static %}
 
 {% block page_title %}
 <title>Geek blog | {{ post.title }}</title>
 {% endblock page_title %}
 
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/css/single_post.css" %}">
+{% endblock css_files %}
+
+{% block content_div_classes %}
+class="pt-3"
+{% endblock content_div_classes %}
+
 {% block content %}
-<article>
+<article class="d-flex flex-column my-5 bg-white-geek p-5 rounded-3">
     <header>
         <h2>{{ post.title }}</h2>
         <div class="meta">
@@ -15,36 +23,52 @@
                 comentario{% else %}comentarios{% endif%})</span>
         </div>
     </header>
-    <img src="{{ post.image.url }}" alt="post-image">
+    <img src="{{ post.image.url }}" alt="post-image" class="w-100">
     <p>
-        {{ post.content|linebreaksbr }}
+        {{ post.content|safe|linebreaksbr }}
     </p>
 </article>
 <div class="clearfix"></div>
-<h3>Comentarios Recientes</h3>
-<div class="comments">
-    {% for comment in comments %}
-    <div class="comment_block">
-        <div class="avatar">
-            <img src="{% static "images/user-default.png" %}" alt="foto_usuario">
-        </div>
-        <div class="individual_comment">
-            <p><strong>{{ comment.username }}</strong> escribió:</p>
-            <p>{{ comment.comment|linebreaks }}</p>
+{% endblock content %}
+
+
+{% block external_content_bottom %}
+<div id="commentSection">
+    {% if comments %}
+    <div id="commentsContainer" class="bg-white-geek p-3 rounded-3">
+        <h3 class="p-2 rounded-3">Comentarios Recientes</h3>
+        <div class="comments">
+            {% for comment in comments %}
+            <div class="comment_block d-flex pb-3">
+                <div class="avatar">
+                    <img src="{% static "common/img/user-default.png" %}" alt="foto_usuario">
+                </div>
+                <div class="me-3"></div>
+                <div class="individual_comment">
+                    <p><strong>{{ comment.username }}</strong> escribió:</p>
+                    <p>{{ comment.comment|linebreaks }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-    <div id="leave_comment">
+    {% endif %}
+    <div class="mb-4"></div>
+    <div>
         <h3>Deja tu comentario</h3>
-        <form action="{% url "single_post_view" post.slug post.id %}" method="POST" onsubmit="myButton.disabled = true; return true;">
+        <form action="{% url "blog:single_post" post.id %}" method="POST">
+            <div id="formFieldsContainer" class="bg-blue-geek p-3 rounded-3">
             {% csrf_token %}
-            {% for field in comment_form %}
-            {{ field.label_tag }}
-            {{ field }}
-            {{ field.errors }}
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}" class="text-white">{{ field.label }}</label>
+                {{ field }}
+                {% include "common/snippets/form_error_field.html" %}
+                <div class="mb-2"></div>
             {% endfor %}
-            <input type="submit" name="myButton" value="Añadir comentario">
+            </div>
+            <div class="mb-2"></div>
+            {% include "common/snippets/submit_form_button.html" with text_content="Añadir comentario" %}
         </form>
     </div>
 </div>
-{% endblock content %}
+{% endblock external_content_bottom %}

@@ -1,0 +1,28 @@
+{% extends "common/main.html" %}
+{% load static %}
+
+{% block content %}
+<div id="contenido" class="d-flex flex-column align-items-center my-5">
+    <form id="registerForm" method="POST" class="col-12 col-sm-6 py-5 px-5 bg-white-geek rounded-3" action="{% url "authors:register" %}">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">
+                    {{ field.label }}
+                    {% if field.field.required %}
+                    <span style="color: red;">*</span>
+                    {% endif %}
+                </label>
+                {{ field }}
+                {% include "common/snippets/form_error_field.html" %}
+            </div>
+        {% endfor %}
+        {% include "common/snippets/submit_form_button.html" with text_content='Registrarse' %}          
+        
+    </form>
+</div>
+{% endblock content %}
+
+{% block javascript_files %}
+<script type="module" src="{% static "authors/js/register.js" %}"></script>
+{% endblock javascript_files %}

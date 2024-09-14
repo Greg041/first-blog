@@ -1,6 +1,16 @@
-{% extends "main.html" %}
+{% extends "common/main.html" %}
+
+{% block container_classes %}
+class="container vh-70"
+{% endblock container_classes %}
+
+{% block content_div_classes %}
+class="d-flex justify-content-center my-5"
+{% endblock content_div_classes %}
 
 {% block content %}
-    <p>Gracias por crear tu post!</p>
-    <p>Ve a la <a href="{% url "index_view" %}">página principal</a> para visualizarlo!</p>
+    <article class="bg-white-geek p-3 text-center rounded-3">
+        <p>Gracias por crear tu post!</p>
+        <p>Ve a la <a href="{% url "blog:home" %}">página principal</a> para visualizarlo!</p>
+    </article>
 {% endblock content %}

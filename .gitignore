@@ -1,5 +1,10 @@
 venv/
-secret_key.txt
 blog_web/settings/development.py
 blog_web/settings/.env
-uploads/
+./uploads
+.env
+Pipfile
+Pipfile.lock
+blog_web/db.sqlite3
+db.sqlite3
+.vscode

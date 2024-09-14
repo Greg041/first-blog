@@ -1,3 +1,4 @@
+{% load cloudinary %}
 <article>
     <header>
         <h2>{{ post.title }}</h2>
@@ -7,11 +8,11 @@
                 comentario{% else %}comentarios{% endif%})</span>
         </div>
     </header>
-    <img src={{ post.image.url }} alt="">
+    {% cloudinary post.image %}
     <p>
-        {{ post.excerpt|linebreaks }}
+        {{ post.excerpt|safe }}
     </p>
     <footer >
-        <a class="readmore" href="{% url "single_post_view" post.slug post.id %}">Leer más...</a>
+        <a class="readmore" href="{% url "blog:single_post" post.id %}">Leer más...</a>
     </footer>
 </article>

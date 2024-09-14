@@ -1,16 +1,65 @@
-{% extends "main.html" %}
+{% extends "common/main.html" %}
+{% load static %}
 
 {% block page_title %}
 <title>Geek blog | Agregar post</title>
 {% endblock %}
 
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/css/add_post.css" %}">
+{{ form.media }}
+{% endblock css_files %}
+
+{% block content_div_classes %}
+class="d-flex flex-column my-5 bg-white-geek p-5 rounded-3"
+{% endblock content_div_classes %}
+
 {% block content %}
 <h2>Añadir post</h2>
-<form id="add_post_form" method="POST" enctype="multipart/form-data" onsubmit="myButton.disabled = true; return true;">
-    {{ form }}
-    {% csrf_token %}
-    <input type="submit" name="myButton" value="Añadir post" id="add_post_button">
+<form id="addPostForm" method="POST" enctype="multipart/form-data" onsubmit="myButton.disabled = true; return true;">
+  {% csrf_token %}
+  {% for field in form %}
+    <label for="{{ field.id_for_label }}" class="fw-bold">
+      {{ field.label }}
+      {% if field.field.required %}
+        <span style="color: red;">*</span>
+      {% endif %}
+    </label>
+    {% if field.name == 'category' %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+        <li style="color: red;">{{ error }}</li>
+        {% endfor %}
+      {% endif %}
+      <br>
+      {% for choice in field.field.choices %}
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" name="category" type="checkbox" value="{{ choice.0 }}" id="{{ choice.1 }}">
+        <label class="form-check-label" for="{{ choice.1 }}">
+          {{ choice.1 }}
+        </label>
+      </div>
+      {% endfor %}
+    {% else %}
+      {{ field }}
+    {% endif %}
+    {% include "common/snippets/form_error_field.html" %}
+
+    {# If the field is image field then we'll show the preview  #}
+    {% if field.name == 'image' %}
+    <div>
+      <img id="imagePreview" src="{% static "blog/images/no_image.jpeg" %}" alt="Image Preview" style="max-width: 200px; max-height: 200px;"/>
+    </div>
+    {% endif %}
+    <div class="my-3"></div>
+  {% endfor %}
+
+  {% include "common/snippets/submit_form_button.html" with id="addPostSubmit" name="addPostBtn" text_content="Añadir post" %}
 </form>
 <div class="clearfix"></div>
 {% endblock content %}
+
+{% block javascript_files %}
+<script src="{% static "blog/js/add-post.js" %}"></script>
+{% endblock javascript_files %}
 

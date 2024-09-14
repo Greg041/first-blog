@@ -1,17 +1,14 @@
-from enum import unique
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-
-# Create your models here.
-class Author(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
+# Third party apps imports
+from cloudinary.models import CloudinaryField
+from tinymce.models import HTMLField
+from uuid import uuid4
 
 
 class Category(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=20)
 
     def __str__(self):
@@ -22,12 +19,13 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=50)
-    date = models.DateTimeField()
-    excerpt = models.TextField(max_length=500)
-    content = models.TextField()
-    image = models.ImageField(upload_to="images")
-    author = models.ForeignKey(Author, on_delete=models.DO_NOTHING, null=False)
+    date = models.DateTimeField(auto_now_add=True)
+    excerpt = HTMLField(max_length=500)
+    content = HTMLField()
+    image = CloudinaryField("image")
+    author = models.ForeignKey("authors.Author", on_delete=models.CASCADE, null=False)
     category = models.ManyToManyField(Category)
     slug = models.CharField(max_length=100, default="", db_index=True, unique=True)
 
@@ -39,10 +37,11 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("single_post_view", kwargs={"slug": self.slug, "id":self.id})
+        return reverse("single_post", kwargs={"id":self.id})
     
 
 class Comment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=False)
     username = models.CharField(max_length=50)
     email = models.EmailField()
@@ -50,5 +49,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.username
-
-

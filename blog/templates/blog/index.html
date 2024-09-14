@@ -1,9 +1,57 @@
-{% extends 'main.html' %}
+{% extends 'common/main.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/css/index.css" %}">
+{% endblock css_files %}
+
+{% block container_classes %}
+class="container-fluid d-sm-flex flex-row-reverse justify-content-between"
+{% endblock container_classes %}
+
+{% block content_div_classes %}
+class="col-12 col-sm-9"
+{% endblock content_div_classes %}
+
+{% block external_content_top %}
+<aside id="sidebar" class="col-12 col-sm-20">
+    <div class="search">
+        <form method="POST" action="{% url "blog:home" %}">
+            {% csrf_token %}
+            <input type="search" placeholder="Busca un artículo..." name="search_terms">
+            <input type="image" src="{% static "blog/images/search.png" %}">
+        </form>
+    </div>
+    <div class="clearfix"></div>
+    <nav id="sidebar_nav">
+        <ul>
+            <li><a href="{% url "blog:home" %}?category=Animé">Animé</a></li>
+            <li><a href="{% url "blog:home" %}?category=Videojuegos">Videojuegos</a></li>
+            <li><a href="{% url "blog:home" %}?category=Tecnología">Tecnología</a></li>
+            <li><a href="{% url "blog:home" %}?category=Marketing">Marketing</a></li>
+            <li><a href="{% url "blog:home" %}?category=Gadgets">Gadgets</a></li>
+            <li><a href="{% url "blog:home" %}?category=Diseño">Diseño</a></li>
+        </ul>
+    </nav>
+    <div class="publi">
+        <img src="{% static "blog/images/comida.jpg" %}" alt="publicidad.jpg">
+    </div> 
+</aside>
+{% endblock external_content_top %}
 
 {% block content %}
-{% for current_post in posts %}
-    {% include "blog/includes/posts-list.html" with post=current_post %}
-{% endfor %}
-    {% include "blog/includes/page-navigation.html" %}
-<div class="clearfix"></div>
+<section>
+    {% if posts %}
+        {% for current_post in posts %}
+            {% include "blog/includes/posts-list.html" with post=current_post %}
+        {% endfor %}
+    {% else %}
+        <p class="text-center"><b>No hay posts en el blog.</b></p>
+    {% endif %}
+
+    {% if posts %}
+        {% include "blog/includes/page-navigation.html" %}
+    {% endif %}
+    <div class="clearfix"></div>.
+</section>
 {% endblock content %}
