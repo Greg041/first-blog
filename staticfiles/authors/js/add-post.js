@@ -1,0 +1,1 @@
+disableFormsSubmissionButton('add_post_form');

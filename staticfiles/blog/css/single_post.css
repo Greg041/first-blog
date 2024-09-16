@@ -1,0 +1,21 @@
+.comment_block {
+    margin-bottom: 5%;
+    border-bottom: 1px dotted rgb(85, 85, 85);
+}
+
+.comment_block .avatar {
+    float: left;
+    width: 8%;
+}
+
+.comment_block .avatar img {
+    width: 100%;
+}
+
+#leave_comment {
+    background-color: #1DB7DD;
+}
+
+#leave_comment h3{
+    color: white;
+}
