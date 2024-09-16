@@ -1,7 +1,10 @@
-import os
+# Local imports
 from .base import *
+# Third party imports
 import cloudinary
+import dj_database_url
 from dotenv import load_dotenv
+import os
 
 
 local_env_file = os.path.join(BASE_DIR, ".env")
@@ -28,3 +31,10 @@ cloudinary.config(
 ALLOWED_HOSTS = ['web-production-7672.up.railway.app/', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://web-production-7672.up.railway.app/']
+
+# Database connection
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=500,
+        conn_health_checks=True,
+    )
