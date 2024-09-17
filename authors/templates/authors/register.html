@@ -1,6 +1,10 @@
 {% extends "common/main.html" %}
 {% load static %}
 
+{% block container_classes %}
+class="container vh-70"
+{% endblock container_classes %}
+
 {% block content %}
 <div id="contenido" class="d-flex flex-column align-items-center my-5">
     <form id="registerForm" method="POST" class="col-12 col-sm-6 py-5 px-5 bg-white-geek rounded-3" action="{% url "authors:register" %}">
