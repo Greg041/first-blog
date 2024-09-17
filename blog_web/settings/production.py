@@ -28,9 +28,9 @@ cloudinary.config(
     api_secret = os.getenv('CLOUD_API_SECRET')
 )
 
-ALLOWED_HOSTS = ['web-production-7672.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['geeks-blog.up.railway.app', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-7672.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://geeks-blog.up.railway.app']
 
 # Database connection
 if 'DATABASE_URL' in os.environ:

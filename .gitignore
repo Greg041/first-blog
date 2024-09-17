@@ -8,3 +8,5 @@ Pipfile.lock
 blog_web/db.sqlite3
 db.sqlite3
 .vscode
+*/__pycache__/
+**/__pycache__/
