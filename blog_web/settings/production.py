@@ -15,8 +15,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-MEDIA_URL = '/uploaded-images/'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' 
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
