@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block container_classes %}
-class="container vh-70"
+class="container vh-70 d-flex justify-content-center align-items-center"
 {% endblock container_classes %}
 
 {% block content_div_classes %}
-class="d-flex flex-column align-items-center my-5"
+class="d-flex flex-column col-md-6 my-5"
 {% endblock content_div_classes %}
 
 {% block content %}
-<form id="loginForm" method="POST" class="col-12 col-sm-6 py-5 px-5 bg-white-geek rounded-3" action="{% url "authors:login" %}">
+<form id="loginForm" method="POST" class="col-12 py-5 px-5 bg-white-geek rounded-3" action="{% url "authors:login" %}">
     <div style="color: red;">
         {{ form.non_field_errors }}
     </div>

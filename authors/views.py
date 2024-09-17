@@ -13,7 +13,7 @@ class RegisterAuthorView(SuccessMessageMixin, CreateView):
     model = Author
     form_class = RegisterAuthorForm
     template_name = 'authors/register.html'
-    success_url = reverse_lazy('common:alert')
+    success_url = reverse_lazy('authors:login')
     success_message = "Ya puedes ingresar con tus credenciales"
     
     
